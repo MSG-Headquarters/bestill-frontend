@@ -1,0 +1,17 @@
+{
+  "name": "Be Still by Sileo",
+  "short_name": "Be Still",
+  "description": "Your 12-pillar mindfulness journey with AI companion",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F7FAFB",
+  "theme_color": "#4A7C9B",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='40' fill='%234A7C9B'/><text x='96' y='120' font-size='100' text-anchor='middle' fill='white' font-family='serif'>🌿</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}

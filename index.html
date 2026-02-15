@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be Still by Sileo &mdash; Your Mindfulness Journey</title>
+<meta name="description" content="A 12-pillar mindfulness journey with AI companion, guided sessions, podcast, and community.">
+<meta name="theme-color" content="#4A7C9B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --sky:#4A7C9B;--sky-light:#6BA3C7;--sky-pale:#C5DAE9;--sky-wash:#E8F0F5;
+  --deep:#1E3A5F;--deep-soft:#2C4F73;--deep-dim:#5A6B7A;
+  --warm:#D4AF37;--warm-dim:#B8941F;--warm-glow:rgba(212,175,55,0.1);
+  --sage:#6BA88E;--rose-soft:#C47C8E;
+  --cloud:#FFFFFF;--mist:#F7FAFB;--fog:#EDF3F7;--stone:#D5E3ED;
+  --text:#1E3A5F;--text-body:#3A5068;--text-muted:#7A8E9E;
+  --border:rgba(74,124,155,0.12);
+  --font-display:'Cormorant Garamond',Georgia,serif;
+  --font-body:'Raleway','Segoe UI',sans-serif;
+  --radius:12px;--radius-lg:20px;
+  --shadow:0 4px 24px rgba(30,58,95,0.08);--shadow-lg:0 12px 48px rgba(30,58,95,0.12);
+  --ease:cubic-bezier(0.16,1,0.3,1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--mist);color:var(--text-body);font-family:var(--font-body);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--mist)}::-webkit-scrollbar-thumb{background:var(--sky-pale);border-radius:3px}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--font-body);cursor:pointer}
+
+/* ═══ LAYOUT ═══ */
+.app{display:flex;height:100vh;overflow:hidden}
+.sidebar{width:260px;background:var(--cloud);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden}
+.sidebar-header{padding:20px;border-bottom:1px solid var(--border);text-align:center}
+.sidebar-logo{font-family:var(--font-display);font-size:28px;font-weight:600;color:var(--deep);letter-spacing:1px}
+.sidebar-logo span{color:var(--sky)}
+.sidebar-tagline{font-size:11px;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.sidebar-nav{flex:1;overflow-y:auto;padding:12px 0}
+.nav-section{padding:0 16px;margin-bottom:8px}
+.nav-section-title{font-size:10px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.5px;padding:8px 0 6px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;color:var(--text-body);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;margin-bottom:2px}
+.nav-item:hover{background:var(--fog);color:var(--deep)}
+.nav-item.active{background:linear-gradient(135deg,rgba(74,124,155,0.1),rgba(107,163,199,0.08));color:var(--sky);font-weight:600}
+.nav-item-icon{width:20px;text-align:center;font-size:15px}
+.nav-item-badge{margin-left:auto;font-size:10px;padding:2px 8px;border-radius:10px;background:var(--sky);color:#fff;font-weight:600}
+.sidebar-user{padding:16px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.user-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--sky),var(--sky-light));display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:600}
+.user-info{flex:1}.user-name{font-size:13px;font-weight:600;color:var(--deep)}.user-role{font-size:11px;color:var(--text-muted)}
+
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.topbar{height:56px;background:var(--cloud);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:16px;flex-shrink:0}
+.topbar-title{font-family:var(--font-display);font-size:22px;font-weight:500;color:var(--deep)}
+.topbar-spacer{flex:1}
+.topbar-search{height:36px;width:260px;border-radius:50px;border:1px solid var(--border);background:var(--fog);padding:0 16px;font-family:var(--font-body);font-size:13px;color:var(--text);outline:none;transition:border-color .2s}.topbar-search:focus{border-color:var(--sky)}
+.topbar-search::placeholder{color:var(--text-muted)}
+.topbar-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--text-muted);display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:16px}.topbar-btn:hover{background:var(--fog);color:var(--deep)}
+
+.content{flex:1;overflow-y:auto;padding:24px}
+
+/* ═══ JOURNEY VIEW ═══ */
+.journey-welcome{background:linear-gradient(135deg,var(--sky-wash),var(--fog));border-radius:var(--radius-lg);padding:32px;margin-bottom:24px;position:relative;overflow:hidden}
+.journey-welcome::before{content:'';position:absolute;top:-40%;right:-10%;width:300px;height:300px;border-radius:50%;background:rgba(74,124,155,0.06);filter:blur(40px)}
+.welcome-eyebrow{font-size:11px;font-weight:600;color:var(--sky);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px}
+.welcome-title{font-family:var(--font-display);font-size:32px;font-weight:400;color:var(--deep);margin-bottom:8px}.welcome-title em{font-style:italic;color:var(--sky)}
+.welcome-desc{font-size:15px;color:var(--text-body);max-width:600px;line-height:1.7}
+.welcome-stats{display:flex;gap:24px;margin-top:20px}
+.welcome-stat{text-align:center}.stat-num{font-family:var(--font-display);font-size:28px;font-weight:600;color:var(--deep)}.stat-label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px}
+.pillar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-bottom:32px}
+.pillar-card{background:var(--cloud);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.pillar-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--pillar-color);opacity:0;transition:opacity .3s}
+.pillar-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:rgba(74,124,155,0.2)}.pillar-card:hover::before{opacity:1}
+.pillar-num{font-family:var(--font-display);font-size:36px;font-weight:300;color:var(--stone);position:absolute;top:12px;right:16px}
+.pillar-icon{font-size:28px;margin-bottom:8px}
+.pillar-name{font-family:var(--font-display);font-size:20px;font-weight:500;color:var(--deep);margin-bottom:6px}
+.pillar-desc{font-size:12px;color:var(--text-muted);line-height:1.5;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pillar-progress{height:4px;background:var(--fog);border-radius:2px;overflow:hidden;margin-bottom:8px}
+.pillar-progress-fill{height:100%;background:var(--pillar-color,var(--sky));border-radius:2px;transition:width .5s var(--ease)}
+.pillar-docs-count{font-size:11px;color:var(--text-muted)}
+
+/* ═══ PILLAR DETAIL ═══ */
+.pillar-detail{display:none;animation:fadeSlide .4s var(--ease)}
+.pillar-detail.active{display:block}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.detail-back{background:none;border:none;color:var(--sky);font-size:13px;font-weight:500;padding:0;margin-bottom:16px;cursor:pointer}.detail-back:hover{color:var(--deep)}
+.detail-header{background:linear-gradient(135deg,var(--sky-wash),var(--fog));border-radius:var(--radius-lg);padding:32px;margin-bottom:20px;text-align:center}
+.detail-icon{font-size:48px;margin-bottom:8px}
+.detail-title{font-family:var(--font-display);font-size:32px;font-weight:500;color:var(--deep);margin-bottom:8px}
+.detail-desc{font-size:15px;color:var(--text-body);max-width:600px;margin:0 auto 16px;line-height:1.7}
+.detail-progress{display:flex;align-items:center;gap:12px;max-width:300px;margin:0 auto}
+.detail-progress-fill{flex:1;height:6px;background:var(--fog);border-radius:3px;overflow:hidden}.detail-progress-fill::after{content:'';display:block;height:100%;background:var(--pillar-color,var(--sky));border-radius:3px;width:inherit}
+.detail-progress span{font-size:12px;color:var(--text-muted);white-space:nowrap}
+.detail-video{background:var(--cloud);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:20px}
+.video-placeholder{aspect-ratio:16/9;background:linear-gradient(135deg,#1a2a3a,#2c4f73);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;cursor:pointer;transition:all .3s}.video-placeholder:hover{background:linear-gradient(135deg,#1a2a3a,#3a6280)}
+.video-play-icon{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:12px;border:2px solid rgba(255,255,255,0.2);transition:all .2s}.video-placeholder:hover .video-play-icon{background:rgba(255,255,255,0.25);transform:scale(1.05)}
+.video-label{font-family:var(--font-display);font-size:18px;font-weight:400;opacity:.9}.video-duration{font-size:12px;opacity:.6;margin-top:4px}
+.detail-lessons{background:var(--cloud);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:20px}
+.lesson-item{display:flex;align-items:center;gap:14px;padding:16px 20px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .2s}.lesson-item:last-child{border-bottom:none}.lesson-item:hover{background:var(--fog)}
+.lesson-num{width:28px;height:28px;border-radius:50%;background:var(--fog);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--deep);flex-shrink:0}
+.lesson-info{flex:1}.lesson-title{font-size:14px;font-weight:500;color:var(--deep)}.lesson-type{font-size:11px;color:var(--text-muted)}
+.lesson-btn{padding:6px 16px;border-radius:50px;border:1px solid var(--border);background:transparent;color:var(--sky);font-size:12px;font-weight:500;transition:all .2s}.lesson-btn:hover{background:var(--sky);color:#fff;border-color:var(--sky)}
+
+/* ═══ AI COMPANION ═══ */
+.detail-ai,.ai-panel{background:var(--cloud);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.ai-companion-header{padding:14px 20px;background:linear-gradient(135deg,rgba(74,124,155,0.08),rgba(212,175,55,0.06));border-bottom:1px solid var(--border);font-family:var(--font-display);font-size:16px;color:var(--deep);display:flex;align-items:center;gap:8px}
+.ai-spark{color:var(--warm);font-size:18px}
+.ai-companion-body{padding:20px}
+.ai-message{background:var(--fog);border-radius:var(--radius) var(--radius) var(--radius) 4px;padding:14px 18px;font-size:13px;color:var(--text-body);line-height:1.6;margin-bottom:14px}
+.ai-input-row{display:flex;gap:8px}
+.ai-input{flex:1;height:40px;border-radius:50px;border:1px solid var(--border);background:var(--fog);padding:0 18px;font-family:var(--font-body);font-size:13px;color:var(--text);outline:none}.ai-input:focus{border-color:var(--sky)}
+.ai-send{width:40px;height:40px;border-radius:50%;border:none;background:var(--sky);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s}.ai-send:hover{background:var(--deep)}
+
+/* ═══ PODCAST VIEW ═══ */
+.podcast-header{background:linear-gradient(135deg,var(--deep),var(--deep-soft));border-radius:var(--radius-lg);padding:32px;color:#fff;margin-bottom:24px;display:flex;align-items:center;gap:24px}
+.podcast-art{width:120px;height:120px;border-radius:var(--radius);background:linear-gradient(135deg,var(--sky),var(--warm));display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:40px;color:#fff;flex-shrink:0;box-shadow:0 8px 24px rgba(0,0,0,0.2)}
+.podcast-info h2{font-family:var(--font-display);font-size:28px;font-weight:400;margin-bottom:6px}.podcast-info p{font-size:14px;opacity:.8;line-height:1.6;max-width:500px}
+.podcast-subscribe{margin-top:12px;padding:8px 24px;border-radius:50px;border:1px solid rgba(255,255,255,0.3);background:transparent;color:#fff;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s}.podcast-subscribe:hover{background:rgba(255,255,255,0.1)}
+.podcast-list{background:var(--cloud);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.podcast-ep{display:flex;align-items:center;gap:16px;padding:18px 20px;border-bottom:1px solid var(--border);transition:background .2s;cursor:pointer}.podcast-ep:last-child{border-bottom:none}.podcast-ep:hover{background:var(--fog)}
+.ep-num{font-family:var(--font-display);font-size:20px;font-weight:300;color:var(--stone);min-width:40px;text-align:center}
+.ep-info{flex:1}.ep-title{font-size:15px;font-weight:500;color:var(--deep);margin-bottom:4px}.ep-desc{font-size:12px;color:var(--text-muted);line-height:1.5}.ep-meta{font-size:11px;color:var(--text-muted);margin-top:6px;display:flex;gap:8px;align-items:center}.ep-dot{opacity:.4}
+.ep-play{width:40px;height:40px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--sky);font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}.ep-play:hover{background:var(--sky);color:#fff;border-color:var(--sky)}
+
+/* ═══ SESSIONS VIEW ═══ */
+.sessions-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:24px}
+.session-card{background:var(--cloud);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;transition:all .3s}.session-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.session-type{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;display:inline-block;padding:3px 10px;border-radius:50px}
+.session-group{background:rgba(74,124,155,0.08);color:var(--sky)}.session-one{background:var(--warm-glow);color:var(--warm-dim)}
+.session-title{font-family:var(--font-display);font-size:20px;font-weight:500;color:var(--deep);margin-bottom:6px}
+.session-meta{font-size:12px;color:var(--text-muted);margin-bottom:12px;line-height:1.5}
+.session-join{padding:10px 24px;border-radius:50px;border:none;background:var(--sky);color:#fff;font-size:13px;font-weight:500;transition:all .2s;width:100%}.session-join:hover{background:var(--deep)}
+
+/* ═══ ADMIN VIEW ═══ */
+.admin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.admin-stat{background:var(--cloud);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;text-align:center}
+.admin-stat-num{font-family:var(--font-display);font-size:36px;font-weight:400;color:var(--deep)}.admin-stat-label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.admin-section{background:var(--cloud);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:20px;overflow:hidden}
+.admin-section-header{padding:16px 20px;border-bottom:1px solid var(--border);font-family:var(--font-display);font-size:18px;color:var(--deep);display:flex;align-items:center;justify-content:space-between}
+.admin-section-body{padding:16px 20px}
+.admin-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}.admin-row:last-child{border-bottom:none}
+.admin-row-name{flex:1;font-size:13px;font-weight:500;color:var(--deep)}.admin-row-detail{font-size:12px;color:var(--text-muted)}.admin-row-badge{font-size:10px;padding:3px 10px;border-radius:50px;font-weight:600}
+.badge-active{background:rgba(16,185,129,0.1);color:#10b981}.badge-upcoming{background:rgba(74,124,155,0.1);color:var(--sky)}.badge-complete{background:var(--fog);color:var(--text-muted)}
+
+/* ═══ VIEWS ═══ */
+.view{display:none}.view.active{display:block;animation:fadeSlide .3s var(--ease)}
+@media(max-width:900px){.sidebar{width:220px}.admin-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.sidebar{display:none}.admin-grid{grid-template-columns:1fr}.pillar-grid{grid-template-columns:1fr}.sessions-grid{grid-template-columns:1fr}.podcast-header{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">BE <span>STILL</span></div>
+      <div class="sidebar-tagline">by Sileo</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-title">Journey</div>
+        <div class="nav-item active" onclick="showView('journey',this)"><span class="nav-item-icon">🌿</span>My Journey</div>
+        <div class="nav-item" onclick="showView('podcast',this)"><span class="nav-item-icon">🎙</span>Podcast<span class="nav-item-badge">New</span></div>
+        <div class="nav-item" onclick="showView('companion',this)"><span class="nav-item-icon">✦</span>AI Companion</div>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Community</div>
+        <div class="nav-item" onclick="showView('sessions',this)"><span class="nav-item-icon">👥</span>Group Sessions</div>
+        <div class="nav-item" onclick="showView('coaching',this)"><span class="nav-item-icon">💬</span>1:1 Coaching</div>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Gillian</div>
+        <div class="nav-item" onclick="showView('admin',this)"><span class="nav-item-icon">⚙️</span>Admin Dashboard</div>
+      </div>
+    </nav>
+    <div class="sidebar-user">
+      <div class="user-avatar">S</div>
+      <div class="user-info"><div class="user-name">Sarah M.</div><div class="user-role">Member since Jan 2026</div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title" id="topbarTitle">My Journey</div>
+      <div class="topbar-spacer"></div>
+      <input type="text" class="topbar-search" placeholder="Search pillars, lessons, episodes...">
+      <button class="topbar-btn" title="Notifications">🔔</button>
+      <button class="topbar-btn" title="Settings">⚙</button>
+    </div>
+    <div class="content">
+
+      <!-- ═══ JOURNEY VIEW ═══ -->
+      <div class="view active" id="view-journey">
+        <div class="journey-welcome">
+          <div class="welcome-eyebrow">Welcome back, Sarah</div>
+          <div class="welcome-title">Your path to <em>stillness</em></div>
+          <div class="welcome-desc">You're currently on Pillar 3: Gratitude. Take a deep breath, and continue when you're ready. There's no rush — this journey is yours.</div>
+          <div class="welcome-stats">
+            <div class="welcome-stat"><div class="stat-num">3/12</div><div class="stat-label">Pillars</div></div>
+            <div class="welcome-stat"><div class="stat-num">14</div><div class="stat-label">Lessons</div></div>
+            <div class="welcome-stat"><div class="stat-num">7</div><div class="stat-label">Days Streak</div></div>
+          </div>
+        </div>
+        <div id="pillarGrid" class="pillar-grid">
+    <div class="pillar-card" data-pillar="1" style="--pillar-color:#4A7C9B" onclick="openPillar(1)">
+      <div class="pillar-num">1</div>
+      <div class="pillar-icon">👁</div>
+      <div class="pillar-name">Awareness</div>
+      <div class="pillar-desc">The state of being conscious of our thoughts, emotions, surroundings, and experiences. Slo...</div>
+      <div class="pillar-progress"><div class="pillar-progress-fill" style="width:8%"></div></div>
+      <div class="pillar-docs-count">5 lessons</div>
+    </div>
+    <div class="pillar-card" data-pillar="2" style="--pillar-color:#5B8FA8" onclick="openPillar(2)">
+      <div class="pillar-num">2</div>
+      <div class="pillar-icon">🧠</div>
+      <div class="pillar-name">Mindset</div>
+      <div class="pillar-desc">Fixed mindset or growth mindset — does the way you think influence your fulfillment? Recog...</div>
+      <div class="pillar-progress"><div class="pillar-progress-fill" style="width:16%"></div></div>
+      <div class="pillar-docs-count">5 lessons</div>
+    </div>
+    <div class="pillar-card" data-pillar="3" style="--pillar-color:#6BA3C7" onclick="openPillar(3)">
+      <div class="pillar-num">3</div>
+      <div class="pillar-icon">🙏</div>
+      <div class="pillar-name">Gratitude</div>
+      <div class="pillar-desc">The act of acknowledging and appreciating the good things in our lives. When we practice g...</div>
+      <div class="pillar-progress"><div class="pillar-progress-fill" style="width:24%"></div></div>
+      <div class="pillar-docs-count">5 lessons</div>
+    </div>
+    <div class="pillar-card" data-pillar="4" style="--pillar-color:#7AB4D0" onclick="openPillar(4)">
+      <div class="pillar-num">4</div>
+      <div class="pillar-icon">🎯</div>
+      <div class="pillar-name">Intention</div>
+      <div class="pillar-desc">Living with intention means being deliberate about how we spend our time and energy. Start...</div>
+      <div class="pillar-progress"><div class="pillar-progress-fill" style="width:32%"></div></div>
+      <div class="pillar-docs-count">5 lessons</div>
+    </div>
+    <div class="pillar-card" data-pillar="5" style="--pillar-color:#89C5D9" onclick="openPillar(5)">
+      <div class="pillar-num">5</div>
+      <div class="pillar-icon">🍃</div>
+      <div class="pillar-name">Simplicity</div>
+      <div class="pillar-desc">In a consumer-driven world, simplicity is revolutionary. Strip away what doesn't serve you...</div>
+      <div class="pillar-progress"><div class="pillar-progress-fill" style="width:40%"></div></div>
+      <div class="pillar-docs-count">5 lessons</div>
+    </div>
+    <div class="pillar-card" data-pillar="6" style="--pillar-color:#6BA88E" onclick="openPillar(6)">
+      <div class="pillar-num">6</div>
+      <div class="pillar-icon">🌿</div>
+      <div class="pillar-name">Nourishment</div>
+      <div class="pillar-desc">Nourishment goes beyond food — it's about feeding your body, mind, and spirit with intenti...</div>
+      <div class="pillar-progress"><div class="pillar-progress-fill" style="width:48%"></div></div>
+      <div class="pillar-docs-count">5 lessons</div>
+    </div>
+    <div class="pillar-card" data-pillar="7" style="--pillar-color:#8E7CB5" onclick="openPillar(7)">
+      <div class="pillar-num">7</div>
+      <div class="pillar-icon">🧘</div>
+      <div class="pillar-name">Movement</div>
+      <div class="pillar-desc">Movement is medicine. It's not about perfection — it's about honoring your body through in...</div>
+      <div class="pillar-progress"><div class="pillar-progress-fill" style="width:56%"></div></div>
+      <div class="pillar-docs-count">5 lessons</div>
+    </div>
+    <div class="pillar-card" data-pillar="8" style="--pillar-color:#C4956A" onclick="openPillar(8)">
+      <div class="pillar-num">8</div>
+      <div class="pillar-icon">💛</div>
+      <div class="pillar-name">Connection</div>
+      <div class="pillar-desc">We are wired for connection. Nurturing authentic relationships and building a circle of in...</div>
+      <div class="pillar-progress"><div class="pillar-progress-fill" style="width:64%"></div></div>
+      <div class="pillar-docs-count">5 lessons</div>
+    </div>
+    <div class="pillar-card" data-pillar="9" style="--pillar-color:#9B7CA3" onclick="openPillar(9)">
+      <div class="pillar-num">9</div>
+      <div class="pillar-icon">✨</div>
+      <div class="pillar-name">Spirituality</div>
+      <div class="pillar-desc">Spirituality is a deeply personal journey of the heart. Explore what gives your life meani...</div>
+      <div class="pillar-progress"><div class="pillar-progress-fill" style="width:72%"></div></div>
+      <div class="pillar-docs-count">5 lessons</div>
+    </div>
+    <div class="pillar-card" data-pillar="10" style="--pillar-color:#7C9B8E" onclick="openPillar(10)">
+      <div class="pillar-num">10</div>
+      <div class="pillar-icon">🕊</div>
+      <div class="pillar-name">Acceptance</div>
+      <div class="pillar-desc">Acceptance is not resignation — it's the courageous act of meeting reality with grace and ...</div>
+      <div class="pillar-progress"><div class="pillar-progress-fill" style="width:80%"></div></div>
+      <div class="pillar-docs-count">5 lessons</div>
+    </div>
+    <div class="pillar-card" data-pillar="11" style="--pillar-color:#C47C8E" onclick="openPillar(11)">
+      <div class="pillar-num">11</div>
+      <div class="pillar-icon">🎨</div>
+      <div class="pillar-name">Creativity</div>
+      <div class="pillar-desc">Creativity is our birthright. Embracing creative expression unlocks new pathways to healin...</div>
+      <div class="pillar-progress"><div class="pillar-progress-fill" style="width:88%"></div></div>
+      <div class="pillar-docs-count">5 lessons</div>
+    </div>
+    <div class="pillar-card" data-pillar="12" style="--pillar-color:#D4AF37" onclick="openPillar(12)">
+      <div class="pillar-num">12</div>
+      <div class="pillar-icon">⭐</div>
+      <div class="pillar-name">Purpose</div>
+      <div class="pillar-desc">Pull it all together. Be the change you wish to see. Your purpose is the culmination of ev...</div>
+      <div class="pillar-progress"><div class="pillar-progress-fill" style="width:96%"></div></div>
+      <div class="pillar-docs-count">5 lessons</div>
+    </div></div>
+        
+    <div class="pillar-detail" id="pillar-1" style="--pillar-color:#4A7C9B">
+      <div class="detail-header">
+        <button class="detail-back" onclick="closePillar()">← Back to Journey</button>
+        <div class="detail-icon">👁</div>
+        <h2 class="detail-title">Pillar 1: Awareness</h2>
+        <p class="detail-desc">The state of being conscious of our thoughts, emotions, surroundings, and experiences. Slow down, recognize, and appropriately respond.</p>
+        <div class="detail-progress"><div class="detail-progress-fill" style="width:8%"></div><span>8% complete</span></div>
+      </div>
+      <div class="detail-video">
+        <div class="video-placeholder"><div class="video-play-icon">▶</div><div class="video-label">Video: Awareness with Gillian</div><div class="video-duration">~15 min</div></div>
+      </div>
+      <div class="detail-lessons"><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">1</div>
+      <div class="lesson-info"><div class="lesson-title">Awareness Reflection</div><div class="lesson-type">Video + Reflection</div></div>
+      <div class="lesson-action"><button class="lesson-btn">▶ Watch</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">2</div>
+      <div class="lesson-info"><div class="lesson-title">Self-Assessment</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">3</div>
+      <div class="lesson-info"><div class="lesson-title">Guided Meditation</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">4</div>
+      <div class="lesson-info"><div class="lesson-title">Morning Routine</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">5</div>
+      <div class="lesson-info"><div class="lesson-title">Life Giving Water</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div></div>
+      <div class="detail-ai">
+        <div class="ai-companion-header"><span class="ai-spark">✦</span> Sileo AI Companion</div>
+        <div class="ai-companion-body">
+          <div class="ai-message">I'm here to guide you through the Awareness pillar. What questions do you have about today's reflection? I can help you explore the concepts, suggest journaling prompts, or guide you through a breathing exercise.</div>
+          <div class="ai-input-row"><input type="text" class="ai-input" placeholder="Ask about awareness..."><button class="ai-send">→</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="pillar-detail" id="pillar-2" style="--pillar-color:#5B8FA8">
+      <div class="detail-header">
+        <button class="detail-back" onclick="closePillar()">← Back to Journey</button>
+        <div class="detail-icon">🧠</div>
+        <h2 class="detail-title">Pillar 2: Mindset</h2>
+        <p class="detail-desc">Fixed mindset or growth mindset — does the way you think influence your fulfillment? Recognizing a fixed mindset is the first step toward growth.</p>
+        <div class="detail-progress"><div class="detail-progress-fill" style="width:16%"></div><span>16% complete</span></div>
+      </div>
+      <div class="detail-video">
+        <div class="video-placeholder"><div class="video-play-icon">▶</div><div class="video-label">Video: Mindset with Gillian</div><div class="video-duration">~15 min</div></div>
+      </div>
+      <div class="detail-lessons"><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">1</div>
+      <div class="lesson-info"><div class="lesson-title">Mindset Reflection</div><div class="lesson-type">Video + Reflection</div></div>
+      <div class="lesson-action"><button class="lesson-btn">▶ Watch</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">2</div>
+      <div class="lesson-info"><div class="lesson-title">Mindset Shift</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">3</div>
+      <div class="lesson-info"><div class="lesson-title">Glorious Greens</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">4</div>
+      <div class="lesson-info"><div class="lesson-title">Microbiome</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">5</div>
+      <div class="lesson-info"><div class="lesson-title">Green Smoothies</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div></div>
+      <div class="detail-ai">
+        <div class="ai-companion-header"><span class="ai-spark">✦</span> Sileo AI Companion</div>
+        <div class="ai-companion-body">
+          <div class="ai-message">I'm here to guide you through the Mindset pillar. What questions do you have about today's reflection? I can help you explore the concepts, suggest journaling prompts, or guide you through a breathing exercise.</div>
+          <div class="ai-input-row"><input type="text" class="ai-input" placeholder="Ask about mindset..."><button class="ai-send">→</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="pillar-detail" id="pillar-3" style="--pillar-color:#6BA3C7">
+      <div class="detail-header">
+        <button class="detail-back" onclick="closePillar()">← Back to Journey</button>
+        <div class="detail-icon">🙏</div>
+        <h2 class="detail-title">Pillar 3: Gratitude</h2>
+        <p class="detail-desc">The act of acknowledging and appreciating the good things in our lives. When we practice gratitude, we shift focus from what is lacking to what we already have.</p>
+        <div class="detail-progress"><div class="detail-progress-fill" style="width:24%"></div><span>24% complete</span></div>
+      </div>
+      <div class="detail-video">
+        <div class="video-placeholder"><div class="video-play-icon">▶</div><div class="video-label">Video: Gratitude with Gillian</div><div class="video-duration">~15 min</div></div>
+      </div>
+      <div class="detail-lessons"><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">1</div>
+      <div class="lesson-info"><div class="lesson-title">Gratitude Reflection</div><div class="lesson-type">Video + Reflection</div></div>
+      <div class="lesson-action"><button class="lesson-btn">▶ Watch</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">2</div>
+      <div class="lesson-info"><div class="lesson-title">Gratitude Journal</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">3</div>
+      <div class="lesson-info"><div class="lesson-title">Toxic Positivity</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">4</div>
+      <div class="lesson-info"><div class="lesson-title">Great Grains</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">5</div>
+      <div class="lesson-info"><div class="lesson-title">Gluten Free Living</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div></div>
+      <div class="detail-ai">
+        <div class="ai-companion-header"><span class="ai-spark">✦</span> Sileo AI Companion</div>
+        <div class="ai-companion-body">
+          <div class="ai-message">I'm here to guide you through the Gratitude pillar. What questions do you have about today's reflection? I can help you explore the concepts, suggest journaling prompts, or guide you through a breathing exercise.</div>
+          <div class="ai-input-row"><input type="text" class="ai-input" placeholder="Ask about gratitude..."><button class="ai-send">→</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="pillar-detail" id="pillar-4" style="--pillar-color:#7AB4D0">
+      <div class="detail-header">
+        <button class="detail-back" onclick="closePillar()">← Back to Journey</button>
+        <div class="detail-icon">🎯</div>
+        <h2 class="detail-title">Pillar 4: Intention</h2>
+        <p class="detail-desc">Living with intention means being deliberate about how we spend our time and energy. Start with clarity about what matters most.</p>
+        <div class="detail-progress"><div class="detail-progress-fill" style="width:32%"></div><span>32% complete</span></div>
+      </div>
+      <div class="detail-video">
+        <div class="video-placeholder"><div class="video-play-icon">▶</div><div class="video-label">Video: Intention with Gillian</div><div class="video-duration">~15 min</div></div>
+      </div>
+      <div class="detail-lessons"><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">1</div>
+      <div class="lesson-info"><div class="lesson-title">Intention Reflection</div><div class="lesson-type">Video + Reflection</div></div>
+      <div class="lesson-action"><button class="lesson-btn">▶ Watch</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">2</div>
+      <div class="lesson-info"><div class="lesson-title">Time & Priorities</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">3</div>
+      <div class="lesson-info"><div class="lesson-title">Time Budget</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">4</div>
+      <div class="lesson-info"><div class="lesson-title">Sugar Blues</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">5</div>
+      <div class="lesson-info"><div class="lesson-title">Decreasing Sugar</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div></div>
+      <div class="detail-ai">
+        <div class="ai-companion-header"><span class="ai-spark">✦</span> Sileo AI Companion</div>
+        <div class="ai-companion-body">
+          <div class="ai-message">I'm here to guide you through the Intention pillar. What questions do you have about today's reflection? I can help you explore the concepts, suggest journaling prompts, or guide you through a breathing exercise.</div>
+          <div class="ai-input-row"><input type="text" class="ai-input" placeholder="Ask about intention..."><button class="ai-send">→</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="pillar-detail" id="pillar-5" style="--pillar-color:#89C5D9">
+      <div class="detail-header">
+        <button class="detail-back" onclick="closePillar()">← Back to Journey</button>
+        <div class="detail-icon">🍃</div>
+        <h2 class="detail-title">Pillar 5: Simplicity</h2>
+        <p class="detail-desc">In a consumer-driven world, simplicity is revolutionary. Strip away what doesn't serve you to make room for what truly matters.</p>
+        <div class="detail-progress"><div class="detail-progress-fill" style="width:40%"></div><span>40% complete</span></div>
+      </div>
+      <div class="detail-video">
+        <div class="video-placeholder"><div class="video-play-icon">▶</div><div class="video-label">Video: Simplicity with Gillian</div><div class="video-duration">~15 min</div></div>
+      </div>
+      <div class="detail-lessons"><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">1</div>
+      <div class="lesson-info"><div class="lesson-title">Simplicity Reflection</div><div class="lesson-type">Video + Reflection</div></div>
+      <div class="lesson-action"><button class="lesson-btn">▶ Watch</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">2</div>
+      <div class="lesson-info"><div class="lesson-title">Consumerism</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">3</div>
+      <div class="lesson-info"><div class="lesson-title">Benefits of Simplicity</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">4</div>
+      <div class="lesson-info"><div class="lesson-title">Practical Simplicity</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">5</div>
+      <div class="lesson-info"><div class="lesson-title">Fermented Foods</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div></div>
+      <div class="detail-ai">
+        <div class="ai-companion-header"><span class="ai-spark">✦</span> Sileo AI Companion</div>
+        <div class="ai-companion-body">
+          <div class="ai-message">I'm here to guide you through the Simplicity pillar. What questions do you have about today's reflection? I can help you explore the concepts, suggest journaling prompts, or guide you through a breathing exercise.</div>
+          <div class="ai-input-row"><input type="text" class="ai-input" placeholder="Ask about simplicity..."><button class="ai-send">→</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="pillar-detail" id="pillar-6" style="--pillar-color:#6BA88E">
+      <div class="detail-header">
+        <button class="detail-back" onclick="closePillar()">← Back to Journey</button>
+        <div class="detail-icon">🌿</div>
+        <h2 class="detail-title">Pillar 6: Nourishment</h2>
+        <p class="detail-desc">Nourishment goes beyond food — it's about feeding your body, mind, and spirit with intention and care through intuitive eating.</p>
+        <div class="detail-progress"><div class="detail-progress-fill" style="width:48%"></div><span>48% complete</span></div>
+      </div>
+      <div class="detail-video">
+        <div class="video-placeholder"><div class="video-play-icon">▶</div><div class="video-label">Video: Nourishment with Gillian</div><div class="video-duration">~15 min</div></div>
+      </div>
+      <div class="detail-lessons"><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">1</div>
+      <div class="lesson-info"><div class="lesson-title">Nourishment Reflection</div><div class="lesson-type">Video + Reflection</div></div>
+      <div class="lesson-action"><button class="lesson-btn">▶ Watch</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">2</div>
+      <div class="lesson-info"><div class="lesson-title">Intuitive Eating</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">3</div>
+      <div class="lesson-info"><div class="lesson-title">Food Rituals</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">4</div>
+      <div class="lesson-info"><div class="lesson-title">Nourishment Assessment</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">5</div>
+      <div class="lesson-info"><div class="lesson-title">Daily Food Goals</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div></div>
+      <div class="detail-ai">
+        <div class="ai-companion-header"><span class="ai-spark">✦</span> Sileo AI Companion</div>
+        <div class="ai-companion-body">
+          <div class="ai-message">I'm here to guide you through the Nourishment pillar. What questions do you have about today's reflection? I can help you explore the concepts, suggest journaling prompts, or guide you through a breathing exercise.</div>
+          <div class="ai-input-row"><input type="text" class="ai-input" placeholder="Ask about nourishment..."><button class="ai-send">→</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="pillar-detail" id="pillar-7" style="--pillar-color:#8E7CB5">
+      <div class="detail-header">
+        <button class="detail-back" onclick="closePillar()">← Back to Journey</button>
+        <div class="detail-icon">🧘</div>
+        <h2 class="detail-title">Pillar 7: Movement</h2>
+        <p class="detail-desc">Movement is medicine. It's not about perfection — it's about honoring your body through intentional, joyful motion.</p>
+        <div class="detail-progress"><div class="detail-progress-fill" style="width:56%"></div><span>56% complete</span></div>
+      </div>
+      <div class="detail-video">
+        <div class="video-placeholder"><div class="video-play-icon">▶</div><div class="video-label">Video: Movement with Gillian</div><div class="video-duration">~15 min</div></div>
+      </div>
+      <div class="detail-lessons"><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">1</div>
+      <div class="lesson-info"><div class="lesson-title">Movement Reflection</div><div class="lesson-type">Video + Reflection</div></div>
+      <div class="lesson-action"><button class="lesson-btn">▶ Watch</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">2</div>
+      <div class="lesson-info"><div class="lesson-title">Movement Mindset</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">3</div>
+      <div class="lesson-info"><div class="lesson-title">Moving Forward</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">4</div>
+      <div class="lesson-info"><div class="lesson-title">Wind Down</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">5</div>
+      <div class="lesson-info"><div class="lesson-title">Caffeine & Energy</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div></div>
+      <div class="detail-ai">
+        <div class="ai-companion-header"><span class="ai-spark">✦</span> Sileo AI Companion</div>
+        <div class="ai-companion-body">
+          <div class="ai-message">I'm here to guide you through the Movement pillar. What questions do you have about today's reflection? I can help you explore the concepts, suggest journaling prompts, or guide you through a breathing exercise.</div>
+          <div class="ai-input-row"><input type="text" class="ai-input" placeholder="Ask about movement..."><button class="ai-send">→</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="pillar-detail" id="pillar-8" style="--pillar-color:#C4956A">
+      <div class="detail-header">
+        <button class="detail-back" onclick="closePillar()">← Back to Journey</button>
+        <div class="detail-icon">💛</div>
+        <h2 class="detail-title">Pillar 8: Connection</h2>
+        <p class="detail-desc">We are wired for connection. Nurturing authentic relationships and building a circle of influence that supports your growth.</p>
+        <div class="detail-progress"><div class="detail-progress-fill" style="width:64%"></div><span>64% complete</span></div>
+      </div>
+      <div class="detail-video">
+        <div class="video-placeholder"><div class="video-play-icon">▶</div><div class="video-label">Video: Connection with Gillian</div><div class="video-duration">~15 min</div></div>
+      </div>
+      <div class="detail-lessons"><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">1</div>
+      <div class="lesson-info"><div class="lesson-title">Connection Reflection</div><div class="lesson-type">Video + Reflection</div></div>
+      <div class="lesson-action"><button class="lesson-btn">▶ Watch</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">2</div>
+      <div class="lesson-info"><div class="lesson-title">Connection Mindset</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">3</div>
+      <div class="lesson-info"><div class="lesson-title">Circle of Influence</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">4</div>
+      <div class="lesson-info"><div class="lesson-title">Vulnerability</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">5</div>
+      <div class="lesson-info"><div class="lesson-title">Boundaries</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div></div>
+      <div class="detail-ai">
+        <div class="ai-companion-header"><span class="ai-spark">✦</span> Sileo AI Companion</div>
+        <div class="ai-companion-body">
+          <div class="ai-message">I'm here to guide you through the Connection pillar. What questions do you have about today's reflection? I can help you explore the concepts, suggest journaling prompts, or guide you through a breathing exercise.</div>
+          <div class="ai-input-row"><input type="text" class="ai-input" placeholder="Ask about connection..."><button class="ai-send">→</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="pillar-detail" id="pillar-9" style="--pillar-color:#9B7CA3">
+      <div class="detail-header">
+        <button class="detail-back" onclick="closePillar()">← Back to Journey</button>
+        <div class="detail-icon">✨</div>
+        <h2 class="detail-title">Pillar 9: Spirituality</h2>
+        <p class="detail-desc">Spirituality is a deeply personal journey of the heart. Explore what gives your life meaning beyond the material world.</p>
+        <div class="detail-progress"><div class="detail-progress-fill" style="width:72%"></div><span>72% complete</span></div>
+      </div>
+      <div class="detail-video">
+        <div class="video-placeholder"><div class="video-play-icon">▶</div><div class="video-label">Video: Spirituality with Gillian</div><div class="video-duration">~15 min</div></div>
+      </div>
+      <div class="detail-lessons"><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">1</div>
+      <div class="lesson-info"><div class="lesson-title">Spirituality Reflection</div><div class="lesson-type">Video + Reflection</div></div>
+      <div class="lesson-action"><button class="lesson-btn">▶ Watch</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">2</div>
+      <div class="lesson-info"><div class="lesson-title">Religion vs Spirituality</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">3</div>
+      <div class="lesson-info"><div class="lesson-title">Benefits of Spirituality</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">4</div>
+      <div class="lesson-info"><div class="lesson-title">Journey of the Heart</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">5</div>
+      <div class="lesson-info"><div class="lesson-title">Dietary Fats</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div></div>
+      <div class="detail-ai">
+        <div class="ai-companion-header"><span class="ai-spark">✦</span> Sileo AI Companion</div>
+        <div class="ai-companion-body">
+          <div class="ai-message">I'm here to guide you through the Spirituality pillar. What questions do you have about today's reflection? I can help you explore the concepts, suggest journaling prompts, or guide you through a breathing exercise.</div>
+          <div class="ai-input-row"><input type="text" class="ai-input" placeholder="Ask about spirituality..."><button class="ai-send">→</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="pillar-detail" id="pillar-10" style="--pillar-color:#7C9B8E">
+      <div class="detail-header">
+        <button class="detail-back" onclick="closePillar()">← Back to Journey</button>
+        <div class="detail-icon">🕊</div>
+        <h2 class="detail-title">Pillar 10: Acceptance</h2>
+        <p class="detail-desc">Acceptance is not resignation — it's the courageous act of meeting reality with grace and choosing how to respond.</p>
+        <div class="detail-progress"><div class="detail-progress-fill" style="width:80%"></div><span>80% complete</span></div>
+      </div>
+      <div class="detail-video">
+        <div class="video-placeholder"><div class="video-play-icon">▶</div><div class="video-label">Video: Acceptance with Gillian</div><div class="video-duration">~15 min</div></div>
+      </div>
+      <div class="detail-lessons"><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">1</div>
+      <div class="lesson-info"><div class="lesson-title">Acceptance Reflection</div><div class="lesson-type">Video + Reflection</div></div>
+      <div class="lesson-action"><button class="lesson-btn">▶ Watch</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">2</div>
+      <div class="lesson-info"><div class="lesson-title">Radical Acceptance</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">3</div>
+      <div class="lesson-info"><div class="lesson-title">Self-Compassion</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">4</div>
+      <div class="lesson-info"><div class="lesson-title">Letting Go</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">5</div>
+      <div class="lesson-info"><div class="lesson-title">Mindful Eating</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div></div>
+      <div class="detail-ai">
+        <div class="ai-companion-header"><span class="ai-spark">✦</span> Sileo AI Companion</div>
+        <div class="ai-companion-body">
+          <div class="ai-message">I'm here to guide you through the Acceptance pillar. What questions do you have about today's reflection? I can help you explore the concepts, suggest journaling prompts, or guide you through a breathing exercise.</div>
+          <div class="ai-input-row"><input type="text" class="ai-input" placeholder="Ask about acceptance..."><button class="ai-send">→</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="pillar-detail" id="pillar-11" style="--pillar-color:#C47C8E">
+      <div class="detail-header">
+        <button class="detail-back" onclick="closePillar()">← Back to Journey</button>
+        <div class="detail-icon">🎨</div>
+        <h2 class="detail-title">Pillar 11: Creativity</h2>
+        <p class="detail-desc">Creativity is our birthright. Embracing creative expression unlocks new pathways to healing, joy, and self-discovery.</p>
+        <div class="detail-progress"><div class="detail-progress-fill" style="width:88%"></div><span>88% complete</span></div>
+      </div>
+      <div class="detail-video">
+        <div class="video-placeholder"><div class="video-play-icon">▶</div><div class="video-label">Video: Creativity with Gillian</div><div class="video-duration">~15 min</div></div>
+      </div>
+      <div class="detail-lessons"><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">1</div>
+      <div class="lesson-info"><div class="lesson-title">Creativity Reflection</div><div class="lesson-type">Video + Reflection</div></div>
+      <div class="lesson-action"><button class="lesson-btn">▶ Watch</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">2</div>
+      <div class="lesson-info"><div class="lesson-title">Embracing Creativity</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">3</div>
+      <div class="lesson-info"><div class="lesson-title">Creativity Assessment</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">4</div>
+      <div class="lesson-info"><div class="lesson-title">Intentional Creativity</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">5</div>
+      <div class="lesson-info"><div class="lesson-title">Celebratory Food</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div></div>
+      <div class="detail-ai">
+        <div class="ai-companion-header"><span class="ai-spark">✦</span> Sileo AI Companion</div>
+        <div class="ai-companion-body">
+          <div class="ai-message">I'm here to guide you through the Creativity pillar. What questions do you have about today's reflection? I can help you explore the concepts, suggest journaling prompts, or guide you through a breathing exercise.</div>
+          <div class="ai-input-row"><input type="text" class="ai-input" placeholder="Ask about creativity..."><button class="ai-send">→</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="pillar-detail" id="pillar-12" style="--pillar-color:#D4AF37">
+      <div class="detail-header">
+        <button class="detail-back" onclick="closePillar()">← Back to Journey</button>
+        <div class="detail-icon">⭐</div>
+        <h2 class="detail-title">Pillar 12: Purpose</h2>
+        <p class="detail-desc">Pull it all together. Be the change you wish to see. Your purpose is the culmination of everything you've learned about yourself.</p>
+        <div class="detail-progress"><div class="detail-progress-fill" style="width:96%"></div><span>96% complete</span></div>
+      </div>
+      <div class="detail-video">
+        <div class="video-placeholder"><div class="video-play-icon">▶</div><div class="video-label">Video: Purpose with Gillian</div><div class="video-duration">~15 min</div></div>
+      </div>
+      <div class="detail-lessons"><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">1</div>
+      <div class="lesson-info"><div class="lesson-title">Final Reflection</div><div class="lesson-type">Video + Reflection</div></div>
+      <div class="lesson-action"><button class="lesson-btn">▶ Watch</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">2</div>
+      <div class="lesson-info"><div class="lesson-title">Guiding Light</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">3</div>
+      <div class="lesson-info"><div class="lesson-title">Divinity Within</div><div class="lesson-type">Deep Dive</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">4</div>
+      <div class="lesson-info"><div class="lesson-title">Be The Change</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div><div class="lesson-item" onclick="event.stopPropagation()">
+      <div class="lesson-num">5</div>
+      <div class="lesson-info"><div class="lesson-title">Balanced Nourishment</div><div class="lesson-type">Nutrition Guide</div></div>
+      <div class="lesson-action"><button class="lesson-btn">📖 Read</button></div>
+    </div></div>
+      <div class="detail-ai">
+        <div class="ai-companion-header"><span class="ai-spark">✦</span> Sileo AI Companion</div>
+        <div class="ai-companion-body">
+          <div class="ai-message">I'm here to guide you through the Purpose pillar. What questions do you have about today's reflection? I can help you explore the concepts, suggest journaling prompts, or guide you through a breathing exercise.</div>
+          <div class="ai-input-row"><input type="text" class="ai-input" placeholder="Ask about purpose..."><button class="ai-send">→</button></div>
+        </div>
+      </div>
+    </div>
+      </div>
+
+      <!-- ═══ PODCAST VIEW ═══ -->
+      <div class="view" id="view-podcast">
+        <div class="podcast-header">
+          <div class="podcast-art">🎙</div>
+          <div class="podcast-info">
+            <h2>Be Still Podcast</h2>
+            <p>Weekly conversations with Gillian Gabryluk on mindfulness, wellness, and living with intention. New episodes every Friday.</p>
+            <button class="podcast-subscribe">Subscribe on Apple Podcasts</button>
+          </div>
+        </div>
+        <div class="podcast-list"><div class="podcast-ep">
+      <div class="ep-num">EP 6</div>
+      <div class="ep-info"><div class="ep-title">Finding Stillness in the Storm</div><div class="ep-desc">How to maintain your practice when life gets chaotic. Gillian shares her personal techniques.</div><div class="ep-meta"><span>Feb 14, 2026</span><span class="ep-dot">·</span><span>32:14</span></div></div>
+      <button class="ep-play">▶</button>
+    </div><div class="podcast-ep">
+      <div class="ep-num">EP 5</div>
+      <div class="ep-info"><div class="ep-title">The Power of Morning Rituals</div><div class="ep-desc">Why the first hour of your day determines everything that follows.</div><div class="ep-meta"><span>Feb 7, 2026</span><span class="ep-dot">·</span><span>28:45</span></div></div>
+      <button class="ep-play">▶</button>
+    </div><div class="podcast-ep">
+      <div class="ep-num">EP 4</div>
+      <div class="ep-info"><div class="ep-title">Intuitive Eating: Beyond the Rules</div><div class="ep-desc">Breaking free from diet culture and learning to trust your body's wisdom.</div><div class="ep-meta"><span>Jan 31, 2026</span><span class="ep-dot">·</span><span>35:20</span></div></div>
+      <button class="ep-play">▶</button>
+    </div><div class="podcast-ep">
+      <div class="ep-num">EP 3</div>
+      <div class="ep-info"><div class="ep-title">Connection in a Disconnected World</div><div class="ep-desc">Building authentic relationships in the age of social media.</div><div class="ep-meta"><span>Jan 24, 2026</span><span class="ep-dot">·</span><span>26:18</span></div></div>
+      <button class="ep-play">▶</button>
+    </div><div class="podcast-ep">
+      <div class="ep-num">EP 2</div>
+      <div class="ep-info"><div class="ep-title">Gratitude as a Daily Practice</div><div class="ep-desc">Simple, science-backed gratitude exercises that actually work.</div><div class="ep-meta"><span>Jan 17, 2026</span><span class="ep-dot">·</span><span>22:40</span></div></div>
+      <button class="ep-play">▶</button>
+    </div><div class="podcast-ep">
+      <div class="ep-num">EP 1</div>
+      <div class="ep-info"><div class="ep-title">Your Mindset Is Your Superpower</div><div class="ep-desc">Shifting from fixed to growth mindset — with practical steps.</div><div class="ep-meta"><span>Jan 10, 2026</span><span class="ep-dot">·</span><span>30:55</span></div></div>
+      <button class="ep-play">▶</button>
+    </div></div>
+      </div>
+
+      <!-- ═══ AI COMPANION VIEW ═══ -->
+      <div class="view" id="view-companion">
+        <div class="journey-welcome" style="margin-bottom:20px">
+          <div class="welcome-eyebrow">Sileo AI Companion</div>
+          <div class="welcome-title">Your personal <em>guide</em></div>
+          <div class="welcome-desc">I'm here to walk alongside you through each pillar. Ask me about reflections, journal prompts, breathing exercises, or anything about your journey.</div>
+        </div>
+        <div class="ai-panel">
+          <div class="ai-companion-header"><span class="ai-spark">✦</span> Sileo AI Companion — Pillar 3: Gratitude</div>
+          <div class="ai-companion-body">
+            <div class="ai-message">Welcome back, Sarah. You're in the Gratitude pillar — one of the most transformative practices in the entire Sileo journey. Gratitude shifts our focus from scarcity to abundance. Would you like me to guide you through today's reflection, suggest a journaling exercise, or explore the connection between gratitude and toxic positivity?</div>
+            <div class="ai-message" style="background:rgba(74,124,155,0.06);border-radius:4px var(--radius) var(--radius) var(--radius)">You can ask me things like:<br>• "Guide me through today's reflection"<br>• "Give me a gratitude journaling prompt"<br>• "Explain the connection between gratitude and toxic positivity"<br>• "Lead me through a 5-minute gratitude meditation"</div>
+            <div class="ai-input-row"><input type="text" class="ai-input" placeholder="Ask your companion anything..."><button class="ai-send">→</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ SESSIONS VIEW ═══ -->
+      <div class="view" id="view-sessions">
+        <div class="journey-welcome" style="margin-bottom:20px">
+          <div class="welcome-eyebrow">Community</div>
+          <div class="welcome-title">Guided <em>Sessions</em></div>
+          <div class="welcome-desc">Join live group sessions led by Gillian and certified coaches. Practice together, ask questions, and deepen your journey with community support.</div>
+        </div>
+        <div class="sessions-grid">
+          <div class="session-card"><div class="session-type session-group">Group Session</div><div class="session-title">Gratitude Circle</div><div class="session-meta">Led by Gillian Gabryluk<br>Wednesday, Feb 19 · 7:00 PM EST<br>12 spots remaining</div><button class="session-join">Join Session</button></div>
+          <div class="session-card"><div class="session-type session-group">Group Session</div><div class="session-title">Morning Meditation</div><div class="session-meta">Led by Coach Rebecca<br>Monday, Feb 17 · 6:30 AM EST<br>Open enrollment</div><button class="session-join">Join Session</button></div>
+          <div class="session-card"><div class="session-type session-group">Group Session</div><div class="session-title">Mindful Movement</div><div class="session-meta">Led by Coach Daniela<br>Saturday, Feb 22 · 10:00 AM EST<br>8 spots remaining</div><button class="session-join">Join Session</button></div>
+          <div class="session-card"><div class="session-type session-group">Group Session</div><div class="session-title">Intention Setting Workshop</div><div class="session-meta">Led by Gillian Gabryluk<br>Thursday, Feb 27 · 7:00 PM EST<br>20 spots remaining</div><button class="session-join">Join Session</button></div>
+        </div>
+      </div>
+
+      <!-- ═══ COACHING VIEW ═══ -->
+      <div class="view" id="view-coaching">
+        <div class="journey-welcome" style="margin-bottom:20px">
+          <div class="welcome-eyebrow">Personal Guidance</div>
+          <div class="welcome-title">1:1 <em>Coaching</em></div>
+          <div class="welcome-desc">Book a private session with Gillian or one of her certified coaches for personalized guidance on your mindfulness journey.</div>
+        </div>
+        <div class="sessions-grid">
+          <div class="session-card"><div class="session-type session-one">1:1 Session</div><div class="session-title">Gillian Gabryluk</div><div class="session-meta">Founder & Lead Coach<br>60 min · $149<br>Next available: Feb 20</div><button class="session-join">Book Now</button></div>
+          <div class="session-card"><div class="session-type session-one">1:1 Session</div><div class="session-title">Coach Rebecca Torres</div><div class="session-meta">Mindfulness & Breathwork<br>45 min · $89<br>Next available: Feb 18</div><button class="session-join">Book Now</button></div>
+          <div class="session-card"><div class="session-type session-one">1:1 Session</div><div class="session-meta">Nutrition & Nourishment<br>45 min · $89<br>Next available: Feb 19</div><div class="session-title">Coach Daniela Vega</div><button class="session-join">Book Now</button></div>
+        </div>
+      </div>
+
+      <!-- ═══ ADMIN DASHBOARD ═══ -->
+      <div class="view" id="view-admin">
+        <div class="journey-welcome" style="margin-bottom:20px;background:linear-gradient(135deg,rgba(212,175,55,0.08),var(--fog))">
+          <div class="welcome-eyebrow">Admin Dashboard</div>
+          <div class="welcome-title">Welcome, <em>Gillian</em></div>
+          <div class="welcome-desc">Here's your overview of everything happening across Be Still — members, sessions, podcast, and coaching.</div>
+        </div>
+        <div class="admin-grid">
+          <div class="admin-stat"><div class="admin-stat-num">247</div><div class="admin-stat-label">Active Members</div></div>
+          <div class="admin-stat"><div class="admin-stat-num">12</div><div class="admin-stat-label">Sessions This Week</div></div>
+          <div class="admin-stat"><div class="admin-stat-num">34</div><div class="admin-stat-label">1:1 Bookings</div></div>
+          <div class="admin-stat"><div class="admin-stat-num">6</div><div class="admin-stat-label">Podcast Episodes</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div class="admin-section">
+            <div class="admin-section-header">Upcoming Sessions <button style="padding:6px 14px;border-radius:50px;border:1px solid var(--border);background:transparent;color:var(--sky);font-size:12px;cursor:pointer">+ New Session</button></div>
+            <div class="admin-section-body">
+              <div class="admin-row"><div class="admin-row-name">Gratitude Circle</div><div class="admin-row-detail">Wed Feb 19 · 7 PM</div><div class="admin-row-badge badge-upcoming">Upcoming</div></div>
+              <div class="admin-row"><div class="admin-row-name">Morning Meditation</div><div class="admin-row-detail">Mon Feb 17 · 6:30 AM</div><div class="admin-row-badge badge-upcoming">Upcoming</div></div>
+              <div class="admin-row"><div class="admin-row-name">Mindful Movement</div><div class="admin-row-detail">Sat Feb 22 · 10 AM</div><div class="admin-row-badge badge-upcoming">Upcoming</div></div>
+              <div class="admin-row"><div class="admin-row-name">Awareness Deep Dive</div><div class="admin-row-detail">Tue Feb 11 · 7 PM</div><div class="admin-row-badge badge-complete">Complete</div></div>
+            </div>
+          </div>
+          <div class="admin-section">
+            <div class="admin-section-header">Recent Members <button style="padding:6px 14px;border-radius:50px;border:1px solid var(--border);background:transparent;color:var(--sky);font-size:12px;cursor:pointer">View All</button></div>
+            <div class="admin-section-body">
+              <div class="admin-row"><div class="admin-row-name">Sarah M.</div><div class="admin-row-detail">Pillar 3 · Gratitude</div><div class="admin-row-badge badge-active">Active</div></div>
+              <div class="admin-row"><div class="admin-row-name">Jessica R.</div><div class="admin-row-detail">Pillar 7 · Movement</div><div class="admin-row-badge badge-active">Active</div></div>
+              <div class="admin-row"><div class="admin-row-name">Amanda K.</div><div class="admin-row-detail">Pillar 1 · Awareness</div><div class="admin-row-badge badge-active">Active</div></div>
+              <div class="admin-row"><div class="admin-row-name">Michael T.</div><div class="admin-row-detail">Pillar 12 · Purpose</div><div class="admin-row-badge badge-complete">Complete</div></div>
+            </div>
+          </div>
+          <div class="admin-section">
+            <div class="admin-section-header">Coaching Queue <button style="padding:6px 14px;border-radius:50px;border:1px solid var(--border);background:transparent;color:var(--sky);font-size:12px;cursor:pointer">Manage</button></div>
+            <div class="admin-section-body">
+              <div class="admin-row"><div class="admin-row-name">Sarah M. → Gillian</div><div class="admin-row-detail">Thu Feb 20 · 2 PM</div><div class="admin-row-badge badge-upcoming">Booked</div></div>
+              <div class="admin-row"><div class="admin-row-name">Jessica R. → Coach Rebecca</div><div class="admin-row-detail">Tue Feb 18 · 10 AM</div><div class="admin-row-badge badge-upcoming">Booked</div></div>
+              <div class="admin-row"><div class="admin-row-name">Amanda K. → Coach Daniela</div><div class="admin-row-detail">Wed Feb 19 · 3 PM</div><div class="admin-row-badge badge-upcoming">Booked</div></div>
+            </div>
+          </div>
+          <div class="admin-section">
+            <div class="admin-section-header">Podcast Management <button style="padding:6px 14px;border-radius:50px;border:1px solid var(--border);background:transparent;color:var(--sky);font-size:12px;cursor:pointer">+ Upload Episode</button></div>
+            <div class="admin-section-body">
+              <div class="admin-row"><div class="admin-row-name">Finding Stillness in the Storm</div><div class="admin-row-detail">Feb 14 · 1,247 plays</div><div class="admin-row-badge badge-active">Live</div></div>
+              <div class="admin-row"><div class="admin-row-name">The Power of Morning Rituals</div><div class="admin-row-detail">Feb 7 · 2,103 plays</div><div class="admin-row-badge badge-active">Live</div></div>
+              <div class="admin-row"><div class="admin-row-name">Intuitive Eating: Beyond Rules</div><div class="admin-row-detail">Jan 31 · 1,892 plays</div><div class="admin-row-badge badge-active">Live</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══ API CONFIGURATION ═══
+const API_URL = window.location.hostname === 'localhost' 
+  ? 'http://localhost:3001' 
+  : 'https://bestill-api.umbrassi.com';
+
+let authToken = localStorage.getItem('bestill_token');
+let currentUser = null;
+
+async function api(path, opts = {}) {
+  const headers = { 'Content-Type': 'application/json' };
+  if (authToken) headers['Authorization'] = 'Bearer ' + authToken;
+  const res = await fetch(API_URL + path, { ...opts, headers });
+  if (res.status === 401) { authToken = null; localStorage.removeItem('bestill_token'); showAuth(); }
+  return res.json();
+}
+
+// ═══ AUTH ═══
+async function signIn(email, password) {
+  const data = await api('/auth/signin', { method: 'POST', body: JSON.stringify({ email, password }) });
+  if (data.session) {
+    authToken = data.session.access_token;
+    localStorage.setItem('bestill_token', authToken);
+    currentUser = data.user;
+    hideAuth();
+    loadJourney();
+  }
+  return data;
+}
+
+async function signUp(email, password, name) {
+  const data = await api('/auth/signup', { method: 'POST', body: JSON.stringify({ email, password, name }) });
+  if (data.session) {
+    authToken = data.session.access_token;
+    localStorage.setItem('bestill_token', authToken);
+    currentUser = data.user;
+    hideAuth();
+    loadJourney();
+  }
+  return data;
+}
+
+function showAuth() { /* Show login modal */ }
+function hideAuth() { /* Hide login modal */ }
+
+// ═══ JOURNEY API ═══
+async function loadJourney() {
+  try {
+    const data = await api('/journey/progress');
+    if (data.progress) updatePillarGrid(data.progress, data.profile);
+  } catch(e) { console.log('Offline mode - using cached data'); }
+}
+
+function updatePillarGrid(progress, profile) {
+  progress.forEach(p => {
+    const card = document.querySelector('[data-pillar="' + p.pillar_num + '"]');
+    if (card) {
+      const fill = card.querySelector('.pillar-progress-fill');
+      if (fill) fill.style.width = p.percent_complete + '%';
+    }
+  });
+  if (profile) {
+    const welcome = document.querySelector('.welcome-title em');
+    if (welcome) welcome.textContent = 'stillness';
+  }
+}
+
+async function completeLesson(pillarNum, lessonIdx, lessonName) {
+  return api('/journey/complete-lesson', { 
+    method: 'POST', 
+    body: JSON.stringify({ pillar_num: pillarNum, lesson_index: lessonIdx, lesson_name: lessonName }) 
+  });
+}
+
+// ═══ AI COMPANION API ═══
+let conversationHistory = [];
+
+async function sendCompanionMessage(message, pillarContext) {
+  const data = await api('/companion/chat', {
+    method: 'POST',
+    body: JSON.stringify({ message, pillar_context: pillarContext, conversation_history: conversationHistory })
+  });
+  if (data.response) {
+    conversationHistory.push({ role: 'user', content: message });
+    conversationHistory.push({ role: 'assistant', content: data.response });
+    return data.response;
+  }
+  return 'I'm resting right now. Please try again in a moment.';
+}
+
+// Wire up AI input fields
+document.addEventListener('click', async (e) => {
+  if (e.target.classList.contains('ai-send')) {
+    const input = e.target.previousElementSibling;
+    const msg = input.value.trim();
+    if (!msg) return;
+    input.value = '';
+    
+    const body = e.target.closest('.ai-companion-body');
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'ai-message';
+    msgDiv.style.background = 'rgba(212,175,55,0.06)';
+    msgDiv.style.borderRadius = '12px 12px 4px 12px';
+    msgDiv.textContent = msg;
+    body.insertBefore(msgDiv, body.lastElementChild);
+    
+    const response = await sendCompanionMessage(msg);
+    const respDiv = document.createElement('div');
+    respDiv.className = 'ai-message';
+    respDiv.textContent = response;
+    body.insertBefore(respDiv, body.lastElementChild);
+    body.parentElement.scrollTop = body.parentElement.scrollHeight;
+  }
+});
+
+// ═══ PODCAST API ═══
+async function loadPodcast() {
+  const data = await api('/podcast/episodes');
+  // Update podcast list if we have live data
+  if (data.episodes?.length) console.log('Loaded', data.episodes.length, 'episodes');
+}
+
+// ═══ SESSIONS API ═══
+async function loadSessions() {
+  const data = await api('/sessions');
+  if (data.sessions?.length) console.log('Loaded', data.sessions.length, 'sessions');
+}
+
+async function bookSession(sessionId) {
+  const data = await api('/sessions/' + sessionId + '/book', { method: 'POST' });
+  if (data.checkout_url) window.location.href = data.checkout_url;
+  else if (data.success) alert('Session booked!');
+  return data;
+}
+
+// ═══ PWA ═══
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
+
+// ═══ INIT ═══
+if (authToken) loadJourney();
+
+function showView(name, el) {
+  // Close any open pillar detail
+  document.querySelectorAll('.pillar-detail').forEach(d => d.classList.remove('active'));
+  document.getElementById('pillarGrid').style.display = '';
+  // Switch view
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-'+name).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  if (el) el.classList.add('active');
+  // Update topbar
+  const titles = {journey:'My Journey',podcast:'Podcast',companion:'AI Companion',sessions:'Group Sessions',coaching:'1:1 Coaching',admin:'Admin Dashboard'};
+  document.getElementById('topbarTitle').textContent = titles[name] || name;
+  // Scroll to top
+  document.querySelector('.content').scrollTop = 0;
+}
+
+function openPillar(num) {
+  document.getElementById('pillarGrid').style.display = 'none';
+  document.querySelector('.journey-welcome').style.display = 'none';
+  document.querySelectorAll('.pillar-detail').forEach(d => d.classList.remove('active'));
+  const detail = document.getElementById('pillar-'+num);
+  if (detail) detail.classList.add('active');
+  document.querySelector('.content').scrollTop = 0;
+}
+
+function closePillar() {
+  document.querySelectorAll('.pillar-detail').forEach(d => d.classList.remove('active'));
+  document.getElementById('pillarGrid').style.display = '';
+  document.querySelector('.journey-welcome').style.display = '';
+  document.querySelector('.content').scrollTop = 0;
+}
+</script>
+</body>
+</html>
